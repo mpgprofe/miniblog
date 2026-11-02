@@ -1,0 +1,7 @@
+$ # Cuerpo del JWT decodificado (es Base64, NO está cifrado)
+{
+  "sub": 1,
+  "role": "student",
+  "iat": 1793627523,
+  "exp": 1793631123
+}

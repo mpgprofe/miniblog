@@ -1,0 +1,23 @@
+$ npm test
+✔ sin sesión no se puede usar la IA (401)
+✔ texto demasiado largo → 422 y no se llama al modelo
+✔ resumen correcto: modelo barato y tope de salida
+✔ GET /api/posts devuelve una página con metadatos
+✔ crear una entrada sin token → 401 con Problem Details
+✔ validación: datos incorrectos → 422 con lista de errores por campo
+✔ flujo feliz: crear (201 + Location) y el borrador no es público
+✔ control de acceso: un alumno no puede borrar la entrada de otro (403)
+✔ solo el profesorado publica
+✔ login incorrecto → 401 sin revelar si existe el email
+✔ hashPassword no guarda la contraseña en claro y verifica bien
+✔ dos hashes de la misma contraseña son distintos (sal aleatoria)
+✔ postSchema rechaza títulos cortos
+✔ listQuerySchema aplica valores por defecto y limita el máximo
+ℹ tests 14
+ℹ suites 0
+ℹ pass 14
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1040.906487

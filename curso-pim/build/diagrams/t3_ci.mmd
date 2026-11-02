@@ -1,0 +1,10 @@
+flowchart LR
+    P([git push / PR]) --> L[Lint<br/>ESLint + Prettier]
+    L --> U[Tests unitarios<br/>e integración]
+    U --> E[Tests E2E<br/>Playwright]
+    E --> A[Auditoría<br/>npm audit]
+    A --> OK{¿Todo verde?}
+    OK -- Sí --> M([Se puede hacer merge])
+    OK -- No --> X([Bloqueado: arreglar])
+    classDef bad fill:#fee2e2,stroke:#dc2626
+    class X bad

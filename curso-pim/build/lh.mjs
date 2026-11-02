@@ -1,0 +1,13 @@
+import lighthouse from 'lighthouse';
+import * as chromeLauncher from 'chrome-launcher';
+import fs from 'node:fs';
+const url = process.argv[2], out = process.argv[3];
+const chrome = await chromeLauncher.launch({ chromePath: '/opt/pw-browsers/chromium', chromeFlags: ['--headless=new', '--no-sandbox'] });
+const r = await lighthouse(url, { port: chrome.port, output: ['html', 'json'], logLevel: 'error', onlyCategories: ['performance', 'accessibility', 'best-practices', 'seo'] });
+fs.writeFileSync(out + '.html', r.report[0]);
+fs.writeFileSync(out + '.json', r.report[1]);
+const c = r.lhr.categories;
+console.log(Object.fromEntries(Object.entries(c).map(([k, v]) => [k, Math.round(v.score * 100)])));
+const m = r.lhr.audits;
+console.log({ LCP: m['largest-contentful-paint'].displayValue, CLS: m['cumulative-layout-shift'].displayValue, TBT: m['total-blocking-time'].displayValue });
+await chrome.kill();

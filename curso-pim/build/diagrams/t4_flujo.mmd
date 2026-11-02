@@ -1,0 +1,8 @@
+flowchart LR
+    A["1. Entiendo<br/>el problema"] --> B["2. Pido a la IA<br/>con contexto (sin secretos)"]
+    B --> C["3. LEO y entiendo<br/>lo generado"]
+    C --> D["4. Pruebo<br/>(tests + a mano)"]
+    D --> E{¿Lo sé explicar<br/>sin mirar?}
+    E -- No --> C
+    E -- Sí --> F["5. Commit con<br/>mensaje propio"]
+    F --> G["6. Anoto en el<br/>registro de uso de IA"]

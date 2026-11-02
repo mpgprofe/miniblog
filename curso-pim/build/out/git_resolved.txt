@@ -1,0 +1,5 @@
+$ git log --oneline -4
+e0934a0 merge: resolver conflicto del título
+79ed3ef feat(ui): nuevo título con año
+2bb21fe Merge PR #3: título
+365f210 Merge PR #2: feat(posts): listado

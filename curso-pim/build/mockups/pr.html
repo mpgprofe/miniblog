@@ -1,0 +1,12 @@
+<link rel="stylesheet" href="base.css"><style>.chk{display:flex;gap:8px;padding:6px 0;border-bottom:1px solid #eaeef2}.ok{color:#1a7f37;font-weight:700}pre{background:#f6f8fa;border:1px solid #d0d7de;border-radius:6px;padding:8px;margin:6px 0;font-size:12px}.add{background:#e6ffec}.del{background:#ffebe9}</style>
+<span class="tag">Recreación ilustrativa de una Pull Request</span>
+<div class="card"><h2 style="font-size:18px">feat(posts): listado paginado de entradas <span class="muted">#2</span></h2>
+<span class="pill green">● Open</span> <span class="muted">Luis quiere fusionar 2 commits de <code>feat/listado-entradas</code> en <code>main</code></span></div>
+<div class="card"><b>Descripción</b><br>Añade <code>GET /api/posts?page&amp;limit&amp;q</code>.<br>Closes #14 · <span class="muted">Cómo probar: <code>npm test</code> y abrir /docs</span><br>☑ Tests añadidos &nbsp; ☑ OpenAPI actualizado &nbsp; ☐ Captura (no aplica)</div>
+<div class="card"><b>Revisión de Ana</b> <span class="pill yellow">Changes requested</span>
+<pre><span class="del">- const limit = req.query.limit;</span>
+<span class="add">+ const { page, limit, q } = listQuerySchema.parse(req.query);</span></pre>
+💬 <b>Ana:</b> <i>Sin validar, alguien podría pedir limit=1000000. ¿Lo limitamos a 50?</i><br>💬 <b>Luis:</b> <i>Tienes razón, lo arreglo en el siguiente commit 👍</i></div>
+<div class="card"><b>Checks</b>
+<div class="chk"><span class="ok">✔</span> lint — pasó en 12 s</div><div class="chk"><span class="ok">✔</span> test — 14 pruebas OK</div><div class="chk" style="border:0"><span class="ok">✔</span> e2e — 8 pruebas OK</div>
+<div style="margin-top:8px"><span class="pill green">✔ Approved by Ana</span> <span class="muted">· 3 checks pasados · listo para “Squash and merge”</span></div></div>

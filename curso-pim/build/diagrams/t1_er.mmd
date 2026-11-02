@@ -1,0 +1,22 @@
+erDiagram
+    USERS ||--o{ POSTS : escribe
+    CATEGORIES ||--o{ POSTS : clasifica
+    USERS {
+        int id PK
+        string email UK
+        string name
+        string password_hash
+        string role
+    }
+    POSTS {
+        int id PK
+        string title
+        text body
+        string status
+        int author_id FK
+        int category_id FK
+    }
+    CATEGORIES {
+        int id PK
+        string name UK
+    }

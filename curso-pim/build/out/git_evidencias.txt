@@ -1,0 +1,12 @@
+$ git shortlog -sn --all --no-merges
+     4	Ana Ruiz
+     3	Luis Mora
+
+$ git log --no-merges --format="%an  %s"
+Luis Mora  docs: documentar endpoint GET /api/posts
+Ana Ruiz  fix(auth): validar formato del email
+Luis Mora  feat(posts): listado paginado de entradas
+Luis Mora  feat(ui): nuevo título con año
+Ana Ruiz  feat(auth): añadir formulario de login
+Ana Ruiz  feat(ui): cambiar título de la web
+Ana Ruiz  chore: estructura inicial del proyecto

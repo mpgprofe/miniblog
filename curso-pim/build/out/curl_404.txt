@@ -1,0 +1,7 @@
+$ curl -s localhost:3000/api/posts/9999 | jq
+{
+  "type": "https://campusblog.example/errors/404",
+  "title": "No encontrado",
+  "status": 404,
+  "detail": "La entrada no existe"
+}

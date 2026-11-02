@@ -1,0 +1,157 @@
+openapi: 3.0.3
+info:
+    title: CampusBlog API
+    version: 1.0.0
+    description: API de ejemplo del curso PIM (DAW). Blog colaborativo del centro.
+servers:
+    - url: http://localhost:3000
+tags:
+    - name: Auth
+    - name: Posts
+paths:
+    /api/auth/register:
+        post:
+            tags: [Auth]
+            summary: Registrar un usuario
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema: { $ref: '#/components/schemas/Register' }
+            responses:
+                '201': { description: Usuario creado }
+                '409': { $ref: '#/components/responses/Problem' }
+                '422': { $ref: '#/components/responses/Problem' }
+    /api/auth/login:
+        post:
+            tags: [Auth]
+            summary: Iniciar sesión y obtener un JWT
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema: { $ref: '#/components/schemas/Login' }
+            responses:
+                '200':
+                    description: Token JWT
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    token: { type: string }
+                '401': { $ref: '#/components/responses/Problem' }
+    /api/posts:
+        get:
+            tags: [Posts]
+            summary: Listar entradas publicadas (paginado)
+            parameters:
+                - { name: page, in: query, schema: { type: integer, minimum: 1, default: 1 } }
+                - { name: limit, in: query, schema: { type: integer, minimum: 1, maximum: 50, default: 10 } }
+                - { name: q, in: query, description: Texto a buscar en el título, schema: { type: string } }
+            responses:
+                '200':
+                    description: Página de entradas
+                    content:
+                        application/json:
+                            schema: { $ref: '#/components/schemas/PostPage' }
+        post:
+            tags: [Posts]
+            summary: Crear una entrada (queda como borrador)
+            security: [{ bearerAuth: [] }]
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema: { $ref: '#/components/schemas/PostInput' }
+            responses:
+                '201': { description: Creada }
+                '401': { $ref: '#/components/responses/Problem' }
+                '422': { $ref: '#/components/responses/Problem' }
+    /api/posts/{id}:
+        parameters:
+            - { name: id, in: path, required: true, schema: { type: integer } }
+        get:
+            tags: [Posts]
+            summary: Ver una entrada publicada
+            responses:
+                '200': { description: La entrada }
+                '404': { $ref: '#/components/responses/Problem' }
+        delete:
+            tags: [Posts]
+            summary: Borrar una entrada (solo su autor o un admin)
+            security: [{ bearerAuth: [] }]
+            responses:
+                '204': { description: Borrada }
+                '403': { $ref: '#/components/responses/Problem' }
+                '404': { $ref: '#/components/responses/Problem' }
+    /api/posts/{id}/publish:
+        patch:
+            tags: [Posts]
+            summary: Publicar una entrada (profesorado)
+            security: [{ bearerAuth: [] }]
+            parameters:
+                - { name: id, in: path, required: true, schema: { type: integer } }
+            responses:
+                '204': { description: Publicada }
+                '403': { $ref: '#/components/responses/Problem' }
+components:
+    securitySchemes:
+        bearerAuth: { type: http, scheme: bearer, bearerFormat: JWT }
+    responses:
+        Problem:
+            description: Error con formato Problem Details (RFC 9457)
+            content:
+                application/problem+json:
+                    schema: { $ref: '#/components/schemas/Problem' }
+    schemas:
+        Register:
+            type: object
+            required: [email, name, password]
+            properties:
+                email: { type: string, format: email }
+                name: { type: string, minLength: 2 }
+                password: { type: string, minLength: 8 }
+        Login:
+            type: object
+            required: [email, password]
+            properties:
+                email: { type: string, format: email }
+                password: { type: string }
+        PostInput:
+            type: object
+            required: [title, body]
+            properties:
+                title: { type: string, minLength: 3, maxLength: 120 }
+                body: { type: string, minLength: 10 }
+                categoryId: { type: integer, nullable: true }
+        PostPage:
+            type: object
+            properties:
+                items:
+                    type: array
+                    items:
+                        type: object
+                        properties:
+                            id: { type: integer }
+                            title: { type: string }
+                            author: { type: string }
+                            createdAt: { type: string }
+                page: { type: integer }
+                limit: { type: integer }
+                total: { type: integer }
+                pages: { type: integer }
+        Problem:
+            type: object
+            properties:
+                type: { type: string }
+                title: { type: string }
+                status: { type: integer }
+                detail: { type: string }
+                errors:
+                    type: array
+                    items:
+                        type: object
+                        properties:
+                            field: { type: string }
+                            message: { type: string }

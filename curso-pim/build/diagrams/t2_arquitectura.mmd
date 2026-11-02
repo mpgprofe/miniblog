@@ -1,0 +1,16 @@
+flowchart LR
+    subgraph Navegador
+      UI["Front<br/>HTML + Tailwind + JS<br/>(o React/Vue)"]
+    end
+    subgraph Servidor
+      API["API REST<br/>Express"]
+      VAL["Validación<br/>(zod)"]
+      AUTH["Auth<br/>JWT + scrypt"]
+      DB[("SQLite / PostgreSQL<br/>+ migraciones")]
+    end
+    DOCS["OpenAPI<br/>/docs (Swagger UI)"]
+    UI -- "fetch JSON" --> API
+    API --> VAL
+    API --> AUTH
+    API --> DB
+    API -.-> DOCS

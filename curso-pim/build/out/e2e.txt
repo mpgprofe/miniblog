@@ -1,0 +1,11 @@
+$ npx playwright test
+Running 8 tests using 2 workers
+  ✓  1 [escritorio] › e2e/home.spec.js:4:1 › la portada lista las entradas publicadas (899ms)
+  ✓  2 [movil] › e2e/home.spec.js:4:1 › la portada lista las entradas publicadas (854ms)
+  ✓  4 [movil] › e2e/home.spec.js:10:1 › el buscador filtra por título (616ms)
+  ✓  3 [escritorio] › e2e/home.spec.js:10:1 › el buscador filtra por título (678ms)
+  ✓  5 [movil] › e2e/home.spec.js:18:1 › búsqueda sin resultados muestra un mensaje (482ms)
+  ✓  6 [escritorio] › e2e/home.spec.js:18:1 › búsqueda sin resultados muestra un mensaje (503ms)
+  ✓  7 [movil] › e2e/home.spec.js:25:1 › accesibilidad: sin violaciones detectables por axe (1.4s)
+  ✓  8 [escritorio] › e2e/home.spec.js:25:1 › accesibilidad: sin violaciones detectables por axe (1.5s)
+  8 passed (6.0s)

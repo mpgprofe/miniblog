@@ -1,0 +1,14 @@
+flowchart TD
+    A([¿Qué stack uso?]) --> B{¿Qué dominan los dos<br/>de la pareja?}
+    B -- "JS/TS" --> C["Node + Express/NestJS<br/>+ React/Vue"]
+    B -- "PHP" --> D["Laravel (o Symfony)<br/>+ Blade/Inertia"]
+    B -- "Java" --> E["Spring Boot<br/>+ React/Angular"]
+    B -- "Python" --> F["FastAPI/Django<br/>+ React/Vue"]
+    C --> G{¿Necesitáis SEO<br/>o SSR?}
+    G -- Sí --> H[Next.js / Nuxt]
+    G -- No --> I[SPA con Vite]
+    D --> J([Verificad: ¿hay hosting<br/>y tutoriales? ¿lo puede<br/>tutorizar el profesorado?])
+    E --> J
+    F --> J
+    H --> J
+    I --> J

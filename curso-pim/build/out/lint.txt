@@ -1,0 +1,4 @@
+$ npx eslint . && npx prettier --check .
+eslint: sin errores
+Checking formatting...
+All matched files use Prettier code style!

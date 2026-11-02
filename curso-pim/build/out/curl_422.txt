@@ -1,0 +1,16 @@
+$ curl -s -X POST localhost:3000/api/posts -H "Authorization: Bearer $TOKEN" -d "{\"title\":\"x\",\"body\":\"corto\"}" | jq
+{
+  "type": "https://campusblog.example/errors/validation",
+  "title": "Datos no válidos",
+  "status": 422,
+  "errors": [
+    {
+      "field": "title",
+      "message": "Mínimo 3 caracteres"
+    },
+    {
+      "field": "body",
+      "message": "Escribe al menos 10 caracteres"
+    }
+  ]
+}

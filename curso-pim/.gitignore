@@ -1,0 +1,11 @@
+node_modules/
+build/_work/
+build/refx/
+build/ref_default.odt
+build/out/lighthouse*.html
+build/out/lighthouse*.json
+ejemplo-campusblog/playwright-report/
+ejemplo-campusblog/test-results/
+ejemplo-campusblog/*.sqlite
+ejemplo-campusblog/.env
+dist/.~lock*

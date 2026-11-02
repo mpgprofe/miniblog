@@ -1,0 +1,7 @@
+node_modules
+public/styles.css
+playwright-report
+test-results
+*.sqlite
+.env
+.env.local

@@ -1,0 +1,9 @@
+$ DB_FILE=campusblog.sqlite node src/server.js
+migración aplicada: 001_inicial.sql
+migración aplicada: 002_categorias.sql
+CampusBlog escuchando en http://localhost:3401
+^C
+
+$ # segundo arranque: ya no hay migraciones pendientes
+CampusBlog escuchando en http://localhost:3401
+^C

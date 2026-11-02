@@ -1,0 +1,17 @@
+sequenceDiagram
+    actor U as Usuario
+    participant F as Front (navegador)
+    participant A as API (Express)
+    participant D as BD (SQLite)
+    U->>F: Escribe email y contraseña
+    F->>A: POST /api/auth/login
+    A->>D: SELECT usuario por email
+    D-->>A: fila (con hash)
+    A->>A: verifyPassword(plain, hash)
+    alt credenciales correctas
+        A-->>F: 200 { token JWT }
+    else incorrectas
+        A-->>F: 401 Problem Details
+    end
+    F->>A: POST /api/posts (Authorization: Bearer ...)
+    A-->>F: 201 Created + Location

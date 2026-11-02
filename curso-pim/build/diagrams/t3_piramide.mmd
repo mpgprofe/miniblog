@@ -1,0 +1,8 @@
+flowchart TB
+    E2E["E2E (Playwright)<br/>pocos · lentos · simulan al usuario"]
+    INT["Integración (API + BD)<br/>algunos · rapidez media"]
+    UNI["Unitarias<br/>muchas · rapidísimas · lógica pura"]
+    E2E --- INT --- UNI
+    style E2E fill:#fee2e2,stroke:#dc2626
+    style INT fill:#fef9c3,stroke:#ca8a04
+    style UNI fill:#dcfce7,stroke:#16a34a

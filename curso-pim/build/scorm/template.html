@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>$pagetitle$</title>
+<style>
+$highlighting-css$
+:root{--bg:#fff;--fg:#0f172a;--muted:#475569;--line:#cbd5e1;--brand:#1d4ed8;--brand-d:#1e3a8a;--code:#f1f5f9;--side:#f8fafc}
+@media (prefers-color-scheme:dark){:root{--bg:#0b1220;--fg:#e2e8f0;--muted:#94a3b8;--line:#334155;--brand:#60a5fa;--brand-d:#93c5fd;--code:#111c33;--side:#0f172a}}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:70px}
+body{margin:0;font:16px/1.65 Inter,system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--fg)}
+header.top{position:sticky;top:0;z-index:10;background:var(--brand-d);color:#fff;padding:.55rem 1rem;display:flex;gap:.8rem;align-items:center}
+header.top strong{font-size:.95rem;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+header.top button{background:transparent;color:#fff;border:1px solid #ffffff88;border-radius:6px;padding:.3rem .6rem;font:inherit;cursor:pointer}
+#bar{height:4px;background:#ffffff33}#bar i{display:block;height:100%;width:0;background:#4ade80;transition:width .2s}
+.layout{display:flex;max-width:1200px;margin:0 auto}
+nav#TOC{width:290px;flex:none;position:sticky;top:48px;align-self:flex-start;max-height:calc(100vh - 48px);overflow:auto;background:var(--side);border-right:1px solid var(--line);padding:1rem;font-size:.88rem}
+nav#TOC ul{list-style:none;margin:0;padding-left:.9rem}nav#TOC>ul{padding-left:0}nav#TOC a{color:var(--fg);text-decoration:none;display:block;padding:.15rem 0}nav#TOC a:hover,nav#TOC a.on{color:var(--brand);font-weight:600}
+main{flex:1;min-width:0;padding:1.5rem 2rem 4rem;max-width:860px}
+h1{color:var(--brand-d);border-bottom:2px solid var(--brand);padding-bottom:.3rem;margin-top:3rem}h2{color:var(--brand);margin-top:2rem}h3{margin-top:1.5rem}
+h1.title{border:0;font-size:2rem;margin-top:.5rem}p.subtitle{color:var(--muted);margin-top:-.8rem}
+img{max-width:100%;height:auto;border-radius:6px}figure{margin:1.2rem 0;text-align:center}figcaption{font-size:.85rem;color:var(--muted);font-style:italic}
+table{border-collapse:collapse;width:100%;font-size:.9rem;margin:1rem 0;display:block;overflow-x:auto}th,td{border:1px solid var(--line);padding:.4rem .6rem;vertical-align:top}th{background:var(--side)}
+code{font-family:"JetBrains Mono","Fira Code",ui-monospace,Menlo,Consolas,monospace;font-size:.86em;background:var(--code);padding:.1em .3em;border-radius:4px}
+pre{background:var(--code);border:1px solid var(--line);border-radius:8px;padding:.8rem 1rem;overflow:auto}pre code{background:none;padding:0;font-size:.82rem}
+blockquote{border-left:4px solid var(--line);margin:1rem 0;padding:.1rem 1rem;color:var(--muted)}
+div.ejemplo,div.consejo,div.aviso,div.empresa,div.reto{border-left:5px solid;border-radius:6px;padding:.6rem 1rem;margin:1rem 0}
+div.ejemplo{background:#2563eb14;border-color:#2563eb}div.consejo{background:#16a34a14;border-color:#16a34a}div.aviso{background:#dc262614;border-color:#dc2626}div.empresa{background:#ea580c14;border-color:#ea580c}div.reto{background:#7c3aed14;border-color:#7c3aed}
+div.ejemplo p,div.consejo p,div.aviso p,div.empresa p,div.reto p{margin:.3rem 0}
+#quiz .q{border:1px solid var(--line);border-radius:10px;padding:1rem;margin:1rem 0}#quiz .q h3{margin:.1rem 0 .6rem;font-size:1rem}
+#quiz label{display:flex;gap:.6rem;align-items:flex-start;padding:.35rem .5rem;border-radius:6px;cursor:pointer}#quiz label:hover{background:var(--side)}
+#quiz label.ok{background:#16a34a22;outline:2px solid #16a34a}#quiz label.bad{background:#dc262622;outline:2px solid #dc2626}
+.btn{background:var(--brand);color:#fff;border:0;border-radius:8px;padding:.55rem 1.1rem;font:inherit;font-weight:600;cursor:pointer}.btn.sec{background:transparent;color:var(--brand);border:1px solid var(--brand)}.btn:disabled{opacity:.5;cursor:default}
+.fb{margin-top:.6rem;padding:.5rem .8rem;border-radius:8px;font-size:.92rem}.fb.ok{background:#16a34a1f}.fb.bad{background:#dc26261f}
+#result{margin:1.5rem 0;padding:1.2rem;border-radius:12px;font-size:1.1rem;display:none}#result.pass{background:#16a34a22;border:2px solid #16a34a}#result.fail{background:#dc262622;border:2px solid #dc2626}
+header.top #lms{font-size:.78rem;color:#cbd5e1}
+@media(max-width:900px){nav#TOC{position:fixed;left:0;top:48px;bottom:0;transform:translateX(-100%);transition:transform .2s;z-index:9;width:280px;max-height:none}body.nav nav#TOC{transform:none}main{padding:1rem}}
+@media(min-width:901px){header.top button{display:none}}
+</style>
+</head>
+<body>
+<header class="top"><button id="menu" aria-label="Mostrar u ocultar el índice">☰ Índice</button><strong>$pagetitle$</strong><span id="lms"></span></header>
+<div id="bar"><i></i></div>
+<div class="layout">
+<nav id="TOC" aria-label="Índice">$table-of-contents$</nav>
+<main>
+$if(title)$<h1 class="title">$title$</h1>$endif$
+$if(subtitle)$<p class="subtitle">$subtitle$</p>$endif$
+$body$
+<h1 id="autoevaluacion">Autoevaluación</h1>
+<p>Contesta las preguntas y pulsa <strong>Comprobar</strong> en cada una para ver la explicación. Al final pulsa <strong>Finalizar y enviar nota</strong>: se enviará tu puntuación a Moodle. Aprobado: <strong><span id="pass"></span> %</strong>. Puedes repetir el cuestionario.</p>
+<div id="quiz"></div>
+<p><button class="btn" id="finish">Finalizar y enviar nota</button> <button class="btn sec" id="retry" hidden>Repetir cuestionario</button></p>
+<div id="result" role="status" aria-live="polite"></div>
+</main>
+</div>
+<script>window.QUIZ = /*QUIZ_JSON*/;</script>
+<script src="scorm.js"></script>
+</body>
+</html>

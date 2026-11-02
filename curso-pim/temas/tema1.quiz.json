@@ -1,0 +1,156 @@
+{
+  "passScore": 70,
+  "questions": [
+    {
+      "type": "single",
+      "q": "¿Cuál es la mejor definición de MVP (producto mínimo viable)?",
+      "options": [
+        "Una versión incompleta y poco cuidada que se tira después.",
+        "La versión más pequeña que ya resuelve el problema principal de un usuario real.",
+        "La versión con todas las funcionalidades pero sin diseño.",
+        "El prototipo en Figma antes de programar."
+      ],
+      "answer": [1],
+      "why": "El MVP es pequeño pero COMPLETO: resuelve de principio a fin el problema principal. No es una versión 'a medias' ni un prototipo visual."
+    },
+    {
+      "type": "multi",
+      "q": "Según MoSCoW, ¿cuáles de estas funcionalidades de CampusBlog serían claramente 'Must'? (marca todas las correctas)",
+      "options": [
+        "Iniciar sesión (login).",
+        "Crear una entrada.",
+        "Modo oscuro.",
+        "Chat en tiempo real entre usuarios."
+      ],
+      "answer": [0, 1],
+      "why": "Sin login y sin crear entradas el blog no tiene sentido (Must). El modo oscuro es 'Could' y el chat en tiempo real sería 'Won't' (esta vez): mucho esfuerzo y poco valor para el problema principal."
+    },
+    {
+      "type": "single",
+      "q": "Lleváis una semana y vais retrasados: el semáforo está en ROJO y todavía hay funcionalidades 'Should' sin empezar. ¿Qué hacéis?",
+      "options": [
+        "Trabajar más horas e intentar llegar a todo.",
+        "Recortar ya: dejar los 'Should' fuera y simplificar si hace falta algún 'Must'.",
+        "Esperar a la semana de entrega para decidir qué se queda.",
+        "Repartir el trabajo restante: uno hace el front y el otro el back sin revisarse."
+      ],
+      "answer": [1],
+      "why": "Los buenos equipos recortan pronto y a propósito. Recortar tarde es recortar a la desesperada. Además, el MVP (Must) va siempre antes que los Should."
+    },
+    {
+      "type": "single",
+      "q": "¿Qué debe tener TODO issue bueno antes de entrar en un sprint?",
+      "options": [
+        "Un título corto y ya está.",
+        "Una historia de usuario con criterios de aceptación comprobables y un tamaño razonable.",
+        "El código ya escrito.",
+        "La aprobación del tribunal."
+      ],
+      "answer": [1],
+      "why": "Los criterios de aceptación permiten decir objetivamente cuándo está terminado, y un tamaño razonable (menos de 1–2 días) evita tarjetas eternas. Es la 'Definition of Ready'."
+    },
+    {
+      "type": "single",
+      "q": "Con WIP = 2, tienes ya 2 tarjetas en 'In progress' y te quedas bloqueado en una. ¿Qué es lo más apropiado?",
+      "options": [
+        "Empezar una tercera tarjeta para no perder el tiempo.",
+        "Pedir ayuda a tu pareja (pair programming) para desbloquear y terminar antes de empezar otra.",
+        "Mover la tarjeta atascada a 'Done'.",
+        "Borrar la tarjeta del tablero."
+      ],
+      "answer": [1],
+      "why": "El límite de trabajo en curso obliga a terminar antes de empezar. Si estás bloqueado, se resuelve ayudando o pidiendo ayuda, no abriendo más frentes."
+    },
+    {
+      "type": "tf",
+      "q": "VERDADERO o FALSO: en una pareja es buena práctica que uno haga solo el front y el otro solo el back, sin revisar el código del otro, para ir más rápido.",
+      "options": ["Verdadero", "Falso"],
+      "answer": [1],
+      "why": "Falso. Ambos debéis poder defender TODO el proyecto. Es mejor repartir por funcionalidades completas (de la base de datos a la pantalla) y que el otro revise cada Pull Request."
+    },
+    {
+      "type": "single",
+      "q": "¿Cuál de estos mensajes de commit sigue la convención Conventional Commits?",
+      "options": [
+        "arreglo cosas",
+        "Cambios varios del viernes",
+        "fix(posts): evitar duplicados en la paginación",
+        "FIX!!! por fin funciona"
+      ],
+      "answer": [2],
+      "why": "El formato es tipo(ámbito opcional): descripción en imperativo. 'fix(posts): evitar duplicados en la paginación' lo cumple y se entiende sin abrir el código."
+    },
+    {
+      "type": "multi",
+      "q": "¿Qué reglas de protección de la rama main son recomendables para una pareja? (marca todas las correctas)",
+      "options": [
+        "Exigir una Pull Request con al menos 1 aprobación antes de fusionar.",
+        "Exigir que los checks del CI (lint y tests) pasen.",
+        "Permitir force push para poder corregir errores rápido.",
+        "Exigir que se resuelvan los comentarios de la revisión."
+      ],
+      "answer": [0, 1, 3],
+      "why": "El force push sobre una rama compartida puede destruir el trabajo del otro, así que debe estar prohibido. Las otras tres reglas son la base de un flujo seguro."
+    },
+    {
+      "type": "single",
+      "q": "Al hacer 'git merge origin/main' Git muestra CONFLICT en un archivo. ¿Qué es lo correcto?",
+      "options": [
+        "Hacer 'git push --force' para que gane tu versión.",
+        "Abrir el archivo, decidir (hablando con tu pareja si hace falta) el resultado final, borrar los marcadores <<<<<<<, ======= y >>>>>>>, añadir el archivo, commitear y repetir los tests.",
+        "Borrar el repositorio y clonarlo de nuevo.",
+        "Dejar los marcadores en el archivo y hacer commit para resolverlo más tarde."
+      ],
+      "answer": [1],
+      "why": "Un conflicto significa que debéis decidir cuál es la versión correcta. Los marcadores deben desaparecer y conviene volver a pasar los tests. Si te lías, 'git merge --abort' te devuelve al estado anterior."
+    },
+    {
+      "type": "single",
+      "q": "Quieres deshacer un commit que YA está publicado en main y que otras personas han descargado. ¿Qué comando es el adecuado?",
+      "options": [
+        "git reset --hard HEAD~1 y git push --force",
+        "git revert <hash>",
+        "git stash",
+        "git commit --amend"
+      ],
+      "answer": [1],
+      "why": "'git revert' crea un nuevo commit que deshace el anterior sin reescribir la historia compartida. Reset + force push es peligroso en ramas compartidas, y amend solo es seguro antes de publicar."
+    },
+    {
+      "type": "single",
+      "q": "¿Para qué sirve un ADR (Architecture Decision Record)?",
+      "options": [
+        "Para generar automáticamente la API.",
+        "Para dejar por escrito una decisión técnica importante, su contexto y las alternativas descartadas.",
+        "Para medir cuántos commits ha hecho cada persona.",
+        "Para sustituir a los tests."
+      ],
+      "answer": [1],
+      "why": "Un ADR es una nota breve que explica el 'por qué' de una decisión. Es una evidencia del razonamiento técnico y os ayuda a defender las decisiones ante el tribunal."
+    },
+    {
+      "type": "single",
+      "q": "Tu pareja y tú queréis que, mientras programáis el front y el back por separado, los dos trabajéis contra un mismo 'contrato' de la API. ¿Qué usáis?",
+      "options": [
+        "Un archivo OpenAPI (openapi.yaml), por ejemplo visualizado con Swagger UI.",
+        "Un chat de WhatsApp con capturas.",
+        "Un PDF con la memoria final.",
+        "Nada: se improvisa al integrar."
+      ],
+      "answer": [0],
+      "why": "OpenAPI describe endpoints, parámetros y respuestas. Con un enfoque contract-first, front y back avanzan en paralelo y la documentación se mantiene viva en el repositorio."
+    },
+    {
+      "type": "single",
+      "q": "¿Cuál es la principal ventaja de escribir los diagramas con Mermaid (texto) en vez de con una imagen exportada?",
+      "options": [
+        "Se ven más bonitos siempre.",
+        "Se versionan con Git, se revisan en las PR y GitHub los dibuja en el README, por lo que no se quedan desactualizados.",
+        "No requieren ningún conocimiento.",
+        "Sustituyen a la base de datos."
+      ],
+      "answer": [1],
+      "why": "'Docs as code': el diagrama es texto dentro del repositorio, se actualiza en la misma PR que cambia el código y todo el mundo ve la última versión."
+    }
+  ]
+}

@@ -1,0 +1,158 @@
+{
+  "passScore": 70,
+  "questions": [
+    {
+      "type": "single",
+      "q": "En la matriz de decisión ponderada de Ana y Luis, ¿por qué el criterio 'Dominio previo de la pareja' tiene el peso más alto (30)?",
+      "options": [
+        "Porque las tecnologías conocidas siempre son las mejores del mercado.",
+        "Porque en un proyecto corto el mayor riesgo es perder tiempo aprendiendo desde cero, y lo que ya domináis reduce ese riesgo.",
+        "Porque así lo exige el tribunal.",
+        "Porque el rendimiento no importa nunca."
+      ],
+      "answer": [1],
+      "why": "En un proyecto de pocas semanas lo que más condiciona el éxito es no atascarse. Los pesos son de cada pareja: si dominarais Laravel, ganaría Laravel."
+    },
+    {
+      "type": "single",
+      "q": "Vuestra pareja quiere usar una tecnología que ninguno de los dos conoce. ¿Qué es lo más sensato?",
+      "options": [
+        "Usarla directamente en todo el proyecto: se aprende sobre la marcha.",
+        "Hacer un 'spike' (prototipo de 2–3 horas) en la semana 1 y decidir con lo aprendido; y limitar la novedad a una sola tecnología.",
+        "Esperar a la última semana para ver si funciona.",
+        "Descartar siempre las tecnologías nuevas."
+      ],
+      "answer": [1],
+      "why": "Un spike convierte la incertidumbre en información barata. Introducir varias tecnologías nuevas a la vez es la receta para no terminar."
+    },
+    {
+      "type": "single",
+      "q": "Un usuario intenta borrar la entrada de OTRA persona estando correctamente identificado. ¿Qué código de estado debe devolver la API?",
+      "options": ["200 OK", "401 Unauthorized", "403 Forbidden", "404 Not Found"],
+      "answer": [2],
+      "why": "401 significa 'no estás autenticado'. Aquí SÍ está autenticado, pero no tiene permiso sobre ese recurso: 403 Forbidden."
+    },
+    {
+      "type": "single",
+      "q": "Tras un POST que crea una entrada correctamente, ¿qué respuesta es la recomendable?",
+      "options": [
+        "200 con { \"error\": null }",
+        "201 Created con la cabecera Location apuntando al nuevo recurso",
+        "204 No Content sin más información",
+        "302 Found"
+      ],
+      "answer": [1],
+      "why": "201 indica que se ha creado algo y Location dice dónde está, de modo que el cliente puede consultarlo sin adivinar la URL."
+    },
+    {
+      "type": "single",
+      "q": "El front envía el título 'x' (demasiado corto) en un formulario. El JSON es válido pero no cumple las reglas. ¿Qué código se usa en CampusBlog?",
+      "options": ["400", "401", "422", "500"],
+      "answer": [2],
+      "why": "422 (Unprocessable Content) se usa cuando la petición está bien formada pero los datos no son válidos. Un 500 significaría un fallo del servidor, que no es el caso."
+    },
+    {
+      "type": "tf",
+      "q": "VERDADERO o FALSO: si el formulario del front ya valida los datos, no hace falta validarlos también en el servidor.",
+      "options": ["Verdadero", "Falso"],
+      "answer": [1],
+      "why": "Falso. Cualquiera puede saltarse el front con curl o Postman. La validación en el servidor es obligatoria y además es una defensa de seguridad."
+    },
+    {
+      "type": "single",
+      "q": "¿Por qué el esquema de paginación de CampusBlog limita 'limit' a un máximo de 50?",
+      "options": [
+        "Porque más de 50 elementos no caben en pantalla.",
+        "Para que nadie pueda pedir limit=1000000 y sobrecargar el servidor y la base de datos.",
+        "Porque SQLite no admite más de 50 filas.",
+        "Es una convención de HTTP."
+      ],
+      "answer": [1],
+      "why": "Sin un tope máximo, un solo cliente puede pedir todas las filas de golpe. Poner un límite es una medida de rendimiento y de seguridad."
+    },
+    {
+      "type": "single",
+      "q": "¿Qué problema evita un formato único de errores (Problem Details) con un único manejador de errores?",
+      "options": [
+        "Que el servidor se caiga.",
+        "Que cada endpoint devuelva los errores a su manera y el front tenga que tratar cada caso por separado.",
+        "Que la base de datos pierda datos.",
+        "Que el CSS no cargue."
+      ],
+      "answer": [1],
+      "why": "Un único formato y un único sitio donde se generan los errores hacen la API predecible; el front siempre sabe dónde buscar el mensaje y los errores por campo."
+    },
+    {
+      "type": "multi",
+      "q": "¿Cuáles de estas afirmaciones sobre migraciones de base de datos son correctas? (marca todas las correctas)",
+      "options": [
+        "Cada cambio de esquema es un archivo numerado que se aplica una sola vez y en orden.",
+        "Si te equivocas en una migración ya aplicada, lo recomendable es crear una nueva que lo corrija.",
+        "Es buena idea modificar la base de datos a mano en producción y apuntarlo luego.",
+        "Permiten que tu pareja y el servidor tengan el mismo esquema que tú."
+      ],
+      "answer": [0, 1, 3],
+      "why": "Las migraciones son el control de versiones del esquema. Editar a mano rompe la reproducibilidad: tu pareja y el servidor acabarían con esquemas distintos."
+    },
+    {
+      "type": "single",
+      "q": "Una pantalla hace 1 consulta para traer 10 entradas y después 10 consultas más (una por autor) dentro de un bucle. ¿Cómo se llama el problema y cómo se arregla?",
+      "options": [
+        "Inyección SQL; con consultas parametrizadas.",
+        "N+1; trayendo los autores en la misma consulta con un JOIN (o con 'include' en el ORM).",
+        "Deadlock; reiniciando el servidor.",
+        "Overfitting; con más datos."
+      ],
+      "answer": [1],
+      "why": "Es el clásico N+1: 11 consultas en vez de 1. Un JOIN (o la opción de carga anticipada del ORM) lo resuelve y por eso conviene revisar las consultas que genera el ORM."
+    },
+    {
+      "type": "single",
+      "q": "¿Cuál de estos casos justifica mejor usar una base de datos NoSQL en un proyecto como CampusBlog?",
+      "options": [
+        "Porque 'está de moda' y suena moderno.",
+        "Usar Redis como caché o para limitar el número de peticiones por usuario, manteniendo SQL para los datos principales.",
+        "Guardar usuarios, entradas y categorías, que están fuertemente relacionados, en documentos sueltos.",
+        "Evitar tener que diseñar el esquema."
+      ],
+      "answer": [1],
+      "why": "NoSQL resuelve problemas concretos. Redis como añadido para caché o límites de peticiones tiene sentido; los datos muy relacionados encajan mejor en SQL."
+    },
+    {
+      "type": "single",
+      "q": "¿Qué ventaja principal aporta TypeScript frente a JavaScript en tu proyecto?",
+      "options": [
+        "Hace que el código se ejecute más rápido en el navegador.",
+        "Detecta errores de tipos y de nombres mientras escribes (por ejemplo, acceder a 'titulo' en vez de 'title') y mejora el autocompletado.",
+        "Elimina la necesidad de hacer tests.",
+        "Sustituye a la base de datos."
+      ],
+      "answer": [1],
+      "why": "TypeScript se compila a JavaScript, así que no es más rápido, pero te avisa de errores antes de ejecutar y facilita refactorizar. No sustituye a los tests."
+    },
+    {
+      "type": "single",
+      "q": "En Tailwind, ¿qué significa la clase 'sm:grid-cols-2' junto a un 'grid' sin más prefijos?",
+      "options": [
+        "Dos columnas siempre, en todos los tamaños.",
+        "Una columna por defecto (móvil) y dos columnas a partir del punto de ruptura 'sm' (mobile-first).",
+        "Dos columnas solo en móvil.",
+        "Que la cuadrícula está desactivada."
+      ],
+      "answer": [1],
+      "why": "Tailwind es mobile-first: las clases sin prefijo valen para todos los tamaños y los prefijos (sm:, md:, lg:) amplían a partir de ese ancho."
+    },
+    {
+      "type": "single",
+      "q": "Necesitas un diálogo modal accesible (foco, teclado, lector de pantalla). ¿Qué es lo más recomendable?",
+      "options": [
+        "Construirlo desde cero con div y JavaScript para aprender.",
+        "Usar un componente que ya resuelva la accesibilidad (por ejemplo, shadcn/ui basado en Radix UI, o Bootstrap) y estilizarlo.",
+        "No usar modales jamás.",
+        "Copiar el código de un foro sin revisarlo."
+      ],
+      "answer": [1],
+      "why": "Gestionar el foco, el teclado y los roles ARIA es difícil de acertar. Usar componentes probados ahorra tiempo y evita errores de accesibilidad."
+    }
+  ]
+}

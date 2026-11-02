@@ -1,0 +1,31 @@
+import { chromium } from 'playwright-core';
+import path from 'node:path';
+const IMG = path.resolve('../img');
+const b = await chromium.launch({ executablePath: '/opt/pw-browsers/chromium', args: ['--no-sandbox'] });
+const B = 'http://localhost:3300';
+let ctx = await b.newContext({ viewport: { width: 1100, height: 700 }, deviceScaleFactor: 2 });
+let pg = await ctx.newPage();
+await pg.goto(B + '/'); await pg.waitForSelector('#lista li');
+await pg.screenshot({ path: `${IMG}/t2_web_escritorio.png` });
+await ctx.close();
+ctx = await b.newContext({ viewport: { width: 390, height: 780 }, deviceScaleFactor: 2, isMobile: true, hasTouch: true });
+pg = await ctx.newPage();
+await pg.goto(B + '/'); await pg.waitForSelector('#lista li');
+await pg.screenshot({ path: `${IMG}/t2_web_movil.png` });
+await ctx.close();
+ctx = await b.newContext({ viewport: { width: 1100, height: 900 }, deviceScaleFactor: 1.5 });
+pg = await ctx.newPage();
+await pg.goto(B + '/docs/'); await pg.waitForSelector('.opblock');
+await pg.locator('#operations-Posts-get_api_posts .opblock-summary-control').click();
+await pg.waitForTimeout(600);
+await pg.screenshot({ path: `${IMG}/t1_swagger.png`, fullPage: false });
+await ctx.close();
+for (const [f, n] of [['lighthouse_antes', 't3_lighthouse_antes'], ['lighthouse', 't3_lighthouse_despues']]) {
+  ctx = await b.newContext({ viewport: { width: 1000, height: 560 }, deviceScaleFactor: 1.5 });
+  pg = await ctx.newPage();
+  await pg.goto('file://' + path.resolve(`out/${f}.html`));
+  await pg.waitForTimeout(1200); await pg.evaluate(() => document.querySelectorAll('canvas').forEach((c) => c.remove()));
+  await pg.screenshot({ path: `${IMG}/${n}.png` });
+  await ctx.close();
+}
+await b.close();

@@ -1,0 +1,192 @@
+{
+  "passScore": 70,
+  "questions": [
+    {
+      "type": "single",
+      "q": "En la pirámide de tests, ¿cuál es la proporción recomendada?",
+      "options": [
+        "Muchos tests E2E y pocos unitarios.",
+        "Muchos tests unitarios (rápidos), algunos de integración y pocos E2E (lentos, de lo crítico).",
+        "Solo tests E2E, porque son los más reales.",
+        "Ninguno: basta con probar a mano."
+      ],
+      "answer": [1],
+      "why": "Los tests unitarios son rápidos y baratos, por eso son la base. Los E2E son lentos y frágiles, así que se reservan para los flujos críticos."
+    },
+    {
+      "type": "single",
+      "q": "¿Cuál es la mejor forma de decidir qué tests escribir primero?",
+      "options": [
+        "Probar todo lo que sea fácil de probar.",
+        "Convertir cada criterio de aceptación de las historias 'Must' en un test.",
+        "Perseguir el 100 % de cobertura como objetivo único.",
+        "Escribirlos solo al final del proyecto."
+      ],
+      "answer": [1],
+      "why": "Los criterios de aceptación son exactamente lo que el usuario necesita que funcione. Cubrir lo crítico es más valioso que un porcentaje alto de cobertura."
+    },
+    {
+      "type": "single",
+      "q": "Quieres probar la ruta que llama a un servicio externo de pago (IA) sin gastar dinero ni depender de internet. ¿Qué haces?",
+      "options": [
+        "Dejas ese código sin probar.",
+        "Inyectas un doble de prueba (mock/fake) del cliente externo en el test.",
+        "Haces la llamada real en cada test.",
+        "Pones la clave de API en el test."
+      ],
+      "answer": [1],
+      "why": "Si el cliente se recibe como parámetro (inyección de dependencias), el test pasa un objeto falso con la misma forma. Es rápido, gratis y determinista."
+    },
+    {
+      "type": "tf",
+      "q": "VERDADERO o FALSO: si la cobertura de tests es del 95 %, el código está bien probado.",
+      "options": ["Verdadero", "Falso"],
+      "answer": [1],
+      "why": "Falso. La cobertura mide qué líneas se ejecutan, no si se comprueba algo útil. Se puede ejecutar una línea sin ninguna aserción. Sirve sobre todo para ver lo que NO está probado."
+    },
+    {
+      "type": "single",
+      "q": "¿Cómo debe guardar una aplicación las contraseñas de los usuarios?",
+      "options": [
+        "En claro, porque la base de datos es privada.",
+        "Cifradas con un algoritmo reversible para poder recuperarlas.",
+        "Como un hash lento con sal (bcrypt, scrypt o Argon2id), nunca la contraseña en sí.",
+        "Con SHA-256 sin sal, que es rápido."
+      ],
+      "answer": [2],
+      "why": "Se guarda solo una huella irreversible. Debe ser lenta a propósito (para frenar la fuerza bruta) y con sal aleatoria (para que dos contraseñas iguales den hashes distintos). SHA-256 a pelo es demasiado rápido."
+    },
+    {
+      "type": "single",
+      "q": "El login de CampusBlog responde igual ('Credenciales incorrectas') si el email no existe o si la contraseña es errónea. ¿Por qué?",
+      "options": [
+        "Por pereza al programar.",
+        "Para no revelar qué emails están registrados en el sistema.",
+        "Porque así lo exige HTTP.",
+        "Para que el login sea más rápido."
+      ],
+      "answer": [1],
+      "why": "Si los mensajes fueran distintos, un atacante podría enumerar qué usuarios existen. Un mensaje idéntico evita esa fuga de información."
+    },
+    {
+      "type": "single",
+      "q": "Un alumno autenticado hace DELETE /api/posts/1 y esa entrada es de otra persona. ¿Cuál es la comprobación de seguridad que debe fallar y qué código se devuelve?",
+      "options": [
+        "Autenticación; 401.",
+        "Control de acceso a nivel de objeto (¿es el autor o admin?); 403.",
+        "Validación de entrada; 422.",
+        "CORS; 500."
+      ],
+      "answer": [1],
+      "why": "El usuario SÍ está autenticado, pero no es el dueño del recurso. El riesgo A01 (control de acceso roto) se evita autorizando en el servidor, recurso a recurso, y respondiendo 403."
+    },
+    {
+      "type": "single",
+      "q": "¿Qué es lo correcto respecto al contenido de un JWT?",
+      "options": [
+        "Está cifrado, así que puedo guardar contraseñas dentro.",
+        "Está firmado pero NO cifrado: cualquiera puede leerlo, aunque no modificarlo sin invalidar la firma.",
+        "No caduca nunca.",
+        "Solo se puede usar con cookies."
+      ],
+      "answer": [1],
+      "why": "El payload es solo Base64: es legible. La firma garantiza integridad, no confidencialidad. Por eso no se guarda nada secreto y se usan caducidades cortas."
+    },
+    {
+      "type": "single",
+      "q": "La consulta se construye así: `SELECT * FROM users WHERE email = '${email}'`. ¿Cuál es el problema y la solución?",
+      "options": [
+        "Es lenta; hay que añadir un índice.",
+        "Es vulnerable a inyección SQL; hay que usar consultas parametrizadas (por ejemplo `WHERE email = ?`).",
+        "Falta un JOIN.",
+        "Está bien si el email se valida en el front."
+      ],
+      "answer": [1],
+      "why": "Concatenar la entrada del usuario permite que escriba SQL en vez de datos. Con parámetros, el valor viaja aparte y nunca se interpreta como código. La validación del front se puede saltar."
+    },
+    {
+      "type": "multi",
+      "q": "¿Cuáles de estas medidas ayudan a prevenir XSS? (marca todas las correctas)",
+      "options": [
+        "Pintar los datos de usuario con textContent en lugar de innerHTML.",
+        "Usar una cabecera Content-Security-Policy con script-src 'self'.",
+        "Sanear con DOMPurify si hay que permitir HTML.",
+        "Permitir CORS con origin '*'."
+      ],
+      "answer": [0, 1, 2],
+      "why": "Escapar la salida, restringir los scripts con CSP y sanear el HTML permitido son defensas válidas. CORS con '*' no protege de XSS y, además, es una mala configuración en producción."
+    },
+    {
+      "type": "single",
+      "q": "Has subido por error tu clave de API a un repositorio público de GitHub y ya has borrado el commit. ¿Qué es imprescindible hacer?",
+      "options": [
+        "Nada: al borrar el commit ya no está.",
+        "Revocar o rotar la clave inmediatamente (generar una nueva y dejar de usar la filtrada).",
+        "Cambiar el nombre del repositorio.",
+        "Esperar a ver si alguien la usa."
+      ],
+      "answer": [1],
+      "why": "Los bots rastrean GitHub y encuentran las claves en segundos; además sigue en el historial. Una clave filtrada se considera comprometida y la única solución segura es rotarla."
+    },
+    {
+      "type": "single",
+      "q": "`npm audit` muestra 5 avisos moderados que vienen de una herramienta de desarrollo (ESLint), y `npm audit --omit=dev` muestra 0. Además, `npm audit fix --force` propone instalar una versión antigua e incompatible. ¿Qué haces?",
+      "options": [
+        "Ejecutas `npm audit fix --force` sin pensarlo.",
+        "Haces triaje: el riesgo para producción es 0, no aplicas el --force a ciegas y actualizas de forma controlada (con tests y Dependabot).",
+        "Eliminas todas las dependencias.",
+        "Ignoras para siempre las auditorías."
+      ],
+      "answer": [1],
+      "why": "Hay que leer el aviso, distinguir lo que llega a producción y no aplicar arreglos destructivos a ciegas. Después se actualiza de forma controlada y se vuelven a pasar los tests."
+    },
+    {
+      "type": "single",
+      "q": "El primer informe de Lighthouse de CampusBlog señaló un CLS de 0,102. ¿Qué mide el CLS y cómo se arregló?",
+      "options": [
+        "Mide la velocidad del servidor; se arregló con más RAM.",
+        "Mide cuánto saltan los elementos al cargar; se arregló reservando el espacio de la lista (altura mínima) para que el pie de página no se desplace.",
+        "Mide el tamaño del JavaScript; se arregló minificándolo.",
+        "Mide los errores de consola; se arregló añadiendo un favicon."
+      ],
+      "answer": [1],
+      "why": "El Cumulative Layout Shift mide los cambios de diseño inesperados. Reservar espacio para el contenido que se carga después evita los saltos. (El favicon arregló otro aviso distinto: el error de consola.)"
+    },
+    {
+      "type": "multi",
+      "q": "Según los cuatro principios WCAG (POUR), ¿qué elementos mejoran la accesibilidad de una web? (marca todas las correctas)",
+      "options": [
+        "Texto alternativo (alt) en las imágenes informativas.",
+        "Todos los controles utilizables solo con teclado y con foco visible.",
+        "Un contraste de texto de al menos 4,5:1.",
+        "Poner todo el texto en gris muy claro para que sea elegante."
+      ],
+      "answer": [0, 1, 2],
+      "why": "Alt (perceptible), teclado (operable) y contraste suficiente (perceptible) son requisitos básicos de WCAG AA. El gris muy claro incumple el contraste."
+    },
+    {
+      "type": "single",
+      "q": "CampusBlog solo recoge email, nombre y hash de contraseña, y solo usa cookies técnicas. ¿Qué principio del RGPD se refleja y qué implicación tiene para las cookies?",
+      "options": [
+        "Minimización de datos; no necesita banner de consentimiento por cookies técnicas, pero sí informar en la política.",
+        "Portabilidad; necesita banner siempre.",
+        "Supresión; necesita pedir consentimiento para todo.",
+        "Ninguno; el RGPD no aplica a proyectos de clase con usuarios reales."
+      ],
+      "answer": [0],
+      "why": "Pedir solo lo imprescindible es minimización. Las cookies estrictamente necesarias no requieren consentimiento previo, pero hay que informar. Si hay usuarios registrados, la normativa sí aplica."
+    },
+    {
+      "type": "single",
+      "q": "Un pre-commit hook con Husky y lint-staged bloquea tu commit porque ESLint detecta un error. ¿Qué papel juega frente al CI?",
+      "options": [
+        "Sustituye al CI: ya no hace falta.",
+        "Es la primera línea rápida y local; el CI y la protección de main siguen siendo el control obligatorio para todos, porque los hooks se pueden saltar con --no-verify.",
+        "No sirve para nada.",
+        "Solo sirve para formatear commits."
+      ],
+      "answer": [1],
+      "why": "Los hooks dan feedback inmediato en tu máquina, pero cada persona puede saltárselos. La garantía real la da el CI junto con las reglas de protección de la rama."
+    }
+  ]
+}

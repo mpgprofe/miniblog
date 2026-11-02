@@ -1,0 +1,4 @@
+$ curl -i -X POST localhost:3000/api/posts -H "Authorization: Bearer $TOKEN" -d "{...válido...}"
+HTTP/1.1 201 Created
+Location: /api/posts/6
+{"id":6,"status":"draft"}

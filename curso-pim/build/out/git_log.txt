@@ -1,0 +1,13 @@
+$ git log --oneline --graph --decorate --all
+*   365f210 (HEAD -> main, origin/main) Merge PR #2: feat(posts): listado
+|\  
+| * f9d5c01 docs: documentar endpoint GET /api/posts
+| * 6206658 feat(posts): listado paginado de entradas
+* |   b59a5dd Merge PR #1: feat(auth): login
+|\ \  
+| |/  
+|/|   
+| * 9b2375b (origin/feat/login, feat/login) fix(auth): validar formato del email
+| * c00c71f feat(auth): añadir formulario de login
+|/  
+* ffa087b chore: estructura inicial del proyecto

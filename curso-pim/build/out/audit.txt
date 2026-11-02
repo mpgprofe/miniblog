@@ -1,0 +1,10 @@
+$ npm audit   # todo el árbol (incluye herramientas de desarrollo)
+  minimatch  <11.0.1
+  Severity: moderate
+  minimatch has potential denial of service via globparts amplification - https://github.com/advisories/GHSA-g3hv-75wg-m249
+  fix available via `npm audit fix --force`
+  Will install eslint@4.0.0, which is a breaking change
+  5 moderate severity vulnerabilities
+
+$ npm audit --omit=dev   # solo lo que viaja a producción
+found 0 vulnerabilities

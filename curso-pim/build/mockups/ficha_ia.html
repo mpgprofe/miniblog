@@ -1,0 +1,9 @@
+<link rel="stylesheet" href="base.css"><style>table{border-collapse:collapse;width:100%;background:#fff}td,th{border:1px solid #d0d7de;padding:6px 8px;text-align:left;font-size:13px;vertical-align:top}th{background:#eef1f4}</style>
+<span class="tag">Plantilla: registro de uso de IA (docs/uso-ia.md)</span>
+<h2 style="font-size:18px">🤖 Registro de uso de IA — CampusBlog (Ana R. y Luis M.)</h2>
+<table><tr><th>Fecha</th><th>Quién</th><th>Herramienta</th><th>Para qué</th><th>Qué hicimos con el resultado</th><th>Cómo lo verificamos</th></tr>
+<tr><td>12/11</td><td>Ana</td><td>Asistente de chat</td><td>Esquema SQL inicial de users/posts</td><td>Cambiamos nombres y añadimos <code>CHECK</code> en <code>status</code></td><td>Migración aplicada + test de integración</td></tr>
+<tr><td>19/11</td><td>Luis</td><td>Asistente en el editor</td><td>Boilerplate de rutas CRUD</td><td>Reescribimos la validación (usaba datos sin validar)</td><td>Revisión cruzada en la PR #6</td></tr>
+<tr><td>26/11</td><td>Ana</td><td>Asistente de chat</td><td>Explicar un error CORS</td><td>Aplicamos solo la configuración mínima necesaria</td><td>Probado en navegador y en E2E</td></tr>
+<tr><td>03/12</td><td>Luis</td><td>Asistente de chat</td><td>Generar casos de prueba límite</td><td>Descartamos 2 de 8 por irrelevantes</td><td>Los 6 restantes pasan y fallan al romper el código</td></tr></table>
+<p class="muted">Regla del módulo: “si no puedes explicarlo sin mirar, no es tuyo todavía”.</p>

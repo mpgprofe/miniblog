@@ -1,0 +1,10 @@
+sequenceDiagram
+    participant N as Navegador
+    participant B as Tu backend (proxy)
+    participant L as API del LLM
+    N->>B: POST /api/ai/summarize (JWT del usuario)
+    B->>B: Valida sesión, tamaño y cuota
+    B->>L: messages.create (clave en variable de entorno)
+    L-->>B: respuesta + uso de tokens
+    B-->>N: { summary }
+    Note over N,L: La clave NUNCA viaja al navegador

@@ -1,0 +1,8 @@
+flowchart LR
+    B["Backlog<br/>issues con<br/>criterios"] -->|planning| T["To do<br/>este sprint"]
+    T --> P["In progress<br/>rama feat/xxx"]
+    P --> R["In review<br/>Pull Request"]
+    R -->|cambios pedidos| P
+    R -->|aprobada + CI verde| D["Done ✔<br/>merge a main"]
+    classDef ok fill:#dcfce7,stroke:#16a34a,color:#14532d
+    class D ok

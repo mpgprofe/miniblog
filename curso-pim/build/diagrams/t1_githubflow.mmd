@@ -1,0 +1,17 @@
+gitGraph
+    commit id: "chore: estructura"
+    branch feat/login
+    checkout feat/login
+    commit id: "feat(auth): form"
+    commit id: "fix(auth): email"
+    checkout main
+    branch feat/listado
+    checkout feat/listado
+    commit id: "feat(posts): listado"
+    checkout main
+    merge feat/login id: "PR #1 ✔ revisada"
+    checkout feat/listado
+    commit id: "test(posts): paginación"
+    checkout main
+    merge feat/listado id: "PR #2 ✔ revisada"
+    commit id: "deploy" type: HIGHLIGHT

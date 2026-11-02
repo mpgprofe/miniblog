@@ -1,0 +1,21 @@
+$ curl -s "localhost:3000/api/posts?limit=2&page=1" | jq
+{
+  "items": [
+    {
+      "id": 5,
+      "title": "Accesibilidad: lo que nos dijo Lighthouse",
+      "createdAt": "2026-11-02 13:52:02",
+      "author": "Ana Ruiz"
+    },
+    {
+      "id": 4,
+      "title": "Probando la API con Swagger UI",
+      "createdAt": "2026-11-02 13:52:02",
+      "author": "Luis Mora"
+    }
+  ],
+  "page": 1,
+  "limit": 2,
+  "total": 5,
+  "pages": 3
+}

@@ -1,0 +1,11 @@
+$ node demos/inyeccion-sql.js
+❌ Consulta construida: SELECT email FROM users WHERE email = '' OR '1'='1'
+   Resultado: [ 'ana@campus.test', 'luis@campus.test' ]
+✅ Consulta parametrizada: SELECT email FROM users WHERE email = ?
+   Resultado: []
+
+$ node demos/inyeccion-sql.js "x' UNION SELECT password_hash FROM users --"
+❌ Consulta construida: SELECT email FROM users WHERE email = 'x' UNION SELECT password_hash FROM users --'
+   Resultado: [ 'hash-secreto-de-ana', 'hash-secreto-de-luis' ]
+✅ Consulta parametrizada: SELECT email FROM users WHERE email = ?
+   Resultado: []

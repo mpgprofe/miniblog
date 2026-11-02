@@ -1,0 +1,6 @@
+$ node --test tests/ai.test.js
+✔ sin sesión no se puede usar la IA (401)
+✔ texto demasiado largo → 422 y no se llama al modelo
+✔ resumen correcto: modelo barato y tope de salida
+ℹ pass 3
+ℹ fail 0

@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="description" content="CampusBlog: el blog colaborativo del centro." />
+        <title>CampusBlog</title>
+        <link rel="icon" href="data:," />
+        <link rel="stylesheet" href="/styles.css" />
+    </head>
+    <body class="bg-slate-50 text-slate-900">
+        <a href="#contenido" class="sr-only focus:not-sr-only focus:absolute focus:p-2 focus:bg-white"
+            >Saltar al contenido</a
+        >
+        <header class="bg-indigo-700 text-white">
+            <div class="mx-auto flex max-w-4xl items-center justify-between gap-4 px-4 py-4">
+                <h1 class="text-xl font-bold">CampusBlog</h1>
+                <nav aria-label="Principal" class="flex gap-4 text-sm">
+                    <a class="underline" href="#contenido">Entradas</a>
+                    <a class="underline" href="/docs/">API</a>
+                </nav>
+            </div>
+        </header>
+        <main id="contenido" class="mx-auto max-w-4xl px-4 py-8">
+            <form id="buscador" class="mb-6 flex flex-col gap-2 sm:flex-row" role="search">
+                <label for="q" class="sr-only">Buscar entradas por título</label>
+                <input
+                    id="q"
+                    name="q"
+                    type="search"
+                    placeholder="Buscar por título…"
+                    class="w-full rounded border border-slate-400 bg-white px-3 py-2"
+                />
+                <button
+                    class="rounded bg-indigo-700 px-4 py-2 font-semibold text-white hover:bg-indigo-800"
+                    type="submit"
+                >
+                    Buscar
+                </button>
+            </form>
+            <ul
+                id="lista"
+                class="grid min-h-[28rem] content-start gap-4 sm:grid-cols-2"
+                aria-live="polite"
+            ></ul>
+            <p id="vacio" class="hidden text-slate-700">No hay entradas que coincidan.</p>
+        </main>
+        <footer class="border-t border-slate-300 py-6 text-center text-sm text-slate-700">
+            Proyecto de ejemplo del curso PIM ·
+            <a class="underline" href="/privacidad.html">Política de privacidad</a>
+        </footer>
+        <script src="/app.js" type="module"></script>
+    </body>
+</html>

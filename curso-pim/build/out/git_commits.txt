@@ -1,0 +1,2 @@
+$ git commit -m "arreglo cosas"   # ❌ mensaje vago
+$ git commit -m "fix(posts): evitar duplicados en la paginación"   # ✅ Conventional Commit

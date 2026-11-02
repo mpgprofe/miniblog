@@ -1,0 +1,12 @@
+sequenceDiagram
+    participant F as Front
+    participant A as API
+    F->>A: POST /login (email, contraseña)
+    A-->>F: JWT firmado (caduca en 1 h)
+    Note over F: Guarda el token<br/>(memoria o cookie HttpOnly)
+    F->>A: GET /api/me · Authorization: Bearer JWT
+    A->>A: Verifica firma y caducidad
+    A-->>F: 200 datos del usuario
+    F->>A: DELETE /api/posts/7 (token de OTRO usuario)
+    A->>A: ¿es el autor? NO
+    A-->>F: 403 Prohibido

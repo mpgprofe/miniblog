@@ -1,0 +1,11 @@
+$ git merge origin/main
+Auto-merging src/config.js
+CONFLICT (content): Merge conflict in src/config.js
+Automatic merge failed; fix conflicts and then commit the result.
+
+$ cat src/config.js
+<<<<<<< HEAD
+export const titulo = "Campus Blog 2026";
+=======
+export const titulo = "CampusBlog - IES Ejemplo";
+>>>>>>> origin/main

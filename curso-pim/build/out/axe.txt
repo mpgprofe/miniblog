@@ -1,0 +1,13 @@
+$ npx playwright test a11y   # axe-core sobre una página con problemas
+Violaciones encontradas: 5
+
+✖ [critical] button-name: Buttons must have discernible text
+    elemento: button
+✖ [serious] color-contrast: Elements must meet minimum color contrast ratio thresholds
+    elemento: p
+✖ [serious] html-has-lang: <html> element must have a lang attribute
+    elemento: html
+✖ [critical] image-alt: Images must have alternative text
+    elemento: img
+✖ [serious] link-name: Links must have discernible text
+    elemento: a

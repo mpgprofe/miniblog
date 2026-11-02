@@ -1,0 +1,23 @@
+$ git commit -m "feat: añadir ok.js"   # código mal formateado
+⋯ Backing up original state…
+✔ Done backing up original state (3d561dd)!
+⋯ Running tasks for staged files…
+    *.js — 1 file
+      ⋯ eslint --fix
+      ⋯ prettier --write
+
+✔ eslint --fix
+✔ prettier --write
+
+✔ Done running tasks for staged files!
+⋯ Staging changes from tasks…
+✔ Done staging changes from tasks!
+⋯ Cleaning up temporary files…
+✔ Done cleaning up temporary files!
+[main 6728b07] feat: añadir ok.js
+ 1 file changed, 2 insertions(+)
+ create mode 100644 ok.js
+
+$ cat ok.js   # lint-staged lo ha formateado antes de commitear
+const a = { x: 1, y: 2 };
+console.log(a);

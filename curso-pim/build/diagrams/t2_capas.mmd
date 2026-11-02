@@ -1,0 +1,6 @@
+flowchart TB
+    R["Ruta / Controlador<br/>(HTTP: parsear, responder)"] --> V["Validación<br/>(esquema zod)"]
+    V --> S["Servicio<br/>(reglas de negocio)"]
+    S --> Q["Repositorio / ORM<br/>(consultas SQL)"]
+    Q --> D[(Base de datos)]
+    E["Manejador de errores<br/>(Problem Details)"] -.-> R
