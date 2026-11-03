@@ -7,7 +7,7 @@ twig:
             postal_code: '14011'
             city: 'Córdoba'
             province: 'Córdoba'
-            phone: '+34 957 73 49 00'
+            phone: '+34 957 000 002'
             phone_link: '+34957734900'
             map_url: 'https://www.openstreetmap.org/search?query=Av.%%20Arroyo%%20del%%20Moro%%2C%%2014011%%20C%%C3%%B3rdoba'
 
