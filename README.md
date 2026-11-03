@@ -75,3 +75,16 @@ revisión; después entra como `docente.demo` (o como administrador), revísala 
 
 > **Importante:** borra estos usuarios (en `/admin/users/`, como administrador) o cambia su contraseña
 > antes de publicar el blog en internet. Contraseñas conocidas en un servidor público son un riesgo.
+## Cómo he desplegado el proyecto
+
+Para desplegar la aplicación en el entorno local de desarrollo se han seguido los siguientes pasos:
+
+1. **Clonado del repositorio:** `git clone git@github.com:alejanjupe/miniblog.git`
+2. **Instalación de dependencias con Composer:** `composer install`
+3. **Creación de la base de datos SQLite:** `php bin/console create-schema`
+4. **Creación del usuario administrador:** `php bin/console app:create-user admin "Administrador"`
+5. **Ejecución del servidor de pruebas de PHP:** `php -S localhost:8000 -t public`
+
+### Problemas surgidos y soluciones
+- **Conflicto de puerto asignado:** Ocurrió el error `Address already in use` al intentar arrancar el servidor en el puerto 8000, resuelto liberando el proceso con `fuser -k 8000/tcp`.
+- **Conflictos de fusión:** Se gestionaron y resolvieron manualmente los marcadores de conflicto de Git en el archivo `config/packages/twig.yaml`.
