@@ -1,4 +1,4 @@
-# README #
+ç# README #
 
 ---
 
@@ -75,3 +75,7 @@ revisión; después entra como `docente.demo` (o como administrador), revísala 
 
 > **Importante:** borra estos usuarios (en `/admin/users/`, como administrador) o cambia su contraseña
 > antes de publicar el blog en internet. Contraseñas conocidas en un servidor público son un riesgo.
+
+## Cómo he desplegado el proyecto
+He utilizado los comandos git clone, composer install y he configurado los remotos origin y upstream.
+También he resuelto conflictos de fusión.
