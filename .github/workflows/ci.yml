@@ -1,0 +1,19 @@
+name: CI
+on:
+  push:
+  pull_request:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    env:
+      APP_ENV: test
+      APP_SECRET: ci-secret
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          extensions: intl, mbstring, xml, ctype, iconv
+      - run: composer install --no-interaction --prefer-dist --no-scripts
+      - run: php bin/console lint:twig templates
+      - run: php bin/console lint:yaml config

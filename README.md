@@ -75,3 +75,22 @@ revisión; después entra como `docente.demo` (o como administrador), revísala 
 
 > **Importante:** borra estos usuarios (en `/admin/users/`, como administrador) o cambia su contraseña
 > antes de publicar el blog en internet. Contraseñas conocidas en un servidor público son un riesgo.
+
+## Cómo he desplegado el proyecto
+
+### Comandos utilizados
+
+```bash
+git clone https://github.com/cjimenezborrego-beep/miniblog.git
+cd miniblog
+composer install
+php bin/console doctrine:schema:update --force
+php bin/console app:crear-usuario
+php -S 0.0.0.0:8000 -t public
+```
+
+### Problemas que me surgieron
+
+- **El navegador no conectaba con `localhost:8000`:** PHP escuchaba solo en IPv6 (`[::1]`). Lo solucioné arrancando el servidor con `0.0.0.0:8000`.
+- **`curl` no estaba instalado en Debian:** lo instalé con `sudo apt install curl`.
+- **Conflicto de fusión en `twig.yaml`:** dos ramas modificaron la misma línea del teléfono. Lo resolví editando el fichero, quitando los marcadores y haciendo `git add` y `git commit`.
