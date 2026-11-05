@@ -75,3 +75,8 @@ revisión; después entra como `docente.demo` (o como administrador), revísala 
 
 > **Importante:** borra estos usuarios (en `/admin/users/`, como administrador) o cambia su contraseña
 > antes de publicar el blog en internet. Contraseñas conocidas en un servidor público son un riesgo.
+## Cómo he desplegado el proyecto
+
+1. Fork de `mpgprofe/miniblog` y clone por SSH.
+2. `composer install`, `php bin/console create-schema` y `php bin/console app:create-user admin "Administrador"`.
+3. Servidor de pruebas con `php -S localhost:8000 -t public`.
