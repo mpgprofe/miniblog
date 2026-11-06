@@ -75,3 +75,56 @@ revisión; después entra como `docente.demo` (o como administrador), revísala 
 
 > **Importante:** borra estos usuarios (en `/admin/users/`, como administrador) o cambia su contraseña
 > antes de publicar el blog en internet. Contraseñas conocidas en un servidor público son un riesgo.
+
+
+
+## Cómo he desplegado el proyecto
+
+Pasos que he seguido para instalar y ejecutar el proyecto en mi máquina virtual Debian:
+
+1. Comprobé la versión de Debian y las dependencias necesarias:
+
+
+```
+$ cat /etc/os-release
+```
+
+2. Instalé Git, PHP, Composer y las extensiones necesarias:
+
+```
+sudo apt update
+sudo apt install git openssh-client php-cli php-sqlite3 php-xml php-mbstring php-intl php-curl unzip composer
+```
+
+3. Configuré mi identidad en Git:
+
+
+```
+git config --global user.name “RequenaTorres”
+git config --global user.email “areqtor1308@g.educaand.es”
+```
+4. Hice un fork del repositorio original y lo cloné por SSH:
+```
+git clone git@github.com:tu-usuario/miniblog.git
+```
+
+5. Instalé las dependencias del proyecto, creé la base de datos y un usuario administrador:
+
+```
+composer install
+php bin/console create-schema
+php bin/console app:create-user admin “Administrador”
+```
+
+6. Arranqué el servidor de pruebas de PHP:
+
+```
+php -S 0.0.0.0:8000 -t public
+```
+
+### Problemas que me han surgido
+
+- **Error VERR_SVM_DISABLED al arrancar la VM en VirtualBox.** La virtualización por hardware (AMD-V) estaba desactivada en la BIOS. Lo solucioné activando "SVM Mode" en la BIOS y desactivando Hyper-V en Windows con `bcdedit /set hypervisorlaunchtype off`.
+- **Permission denied (publickey, password) al conectar por SSH a la VM.** El mensaje de error real era "invalid user": estaba usando un nombre de usuario que no existía en el sistema. Lo resolví comprobando los usuarios reales con `cat /etc/passwd` y usando el nombre exacto (Linux distingue mayúsculas y minúsculas).
+- **El servidor `php -S` no era accesible desde el navegador de Windows.** Por defecto `php -S localhost:8000` solo acepta conexiones desde dentro de la propia VM. Lo arreglé arrancándolo con `php -S 0.0.0.0:8000 -t public` y accediendo desde Windows con la IP de la VM en vez de `localhost`.
+- **Conflicto de fusión al practicar con dos ramas que modificaban la misma línea** (`config/packages/twig.yaml`). Lo resolví editando el fichero a mano, eligiendo la línea correcta, borrando los marcadores `<<<<<<<`, `=======` y `>>>>>>>`, y confirmando con `git add` y `git commit`
